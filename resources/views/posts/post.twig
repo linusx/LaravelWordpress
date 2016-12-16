@@ -1,0 +1,37 @@
+{% extends "base" %}
+
+{% block headertitle %}{{ post.post_title }}{% endblock %}
+
+
+{% block headerimage %}{% if post.attachment.first.guid %}{{ post.attachment.first.guid }}{% endif %}{% endblock %}
+{% block subheadertitle %}By {{ post.author.display_name }} on {{ post.post_date|date('l j, Y') }}{% endblock %}
+
+{% block content %}
+    <article>
+        <div class="post-content">
+            {{ post.post_content }}
+        </div>
+
+        <div class="taxonomy-wrapper">
+            {% if post.categories() %}
+                <ul class="categories">
+                    <li>Categories:</li>
+                    {% for cat in post.categories() %}
+                        <li><a href="/category/{{ cat.slug }}">{{ cat.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+
+            {% if post.tags() %}
+                <ul class="tags">
+                    <li>Tags:</li>
+                    {% for tax in post.tags() %}
+                        <li><a href="/tag/{{ tax.slug }}">{{ tax.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
+    </article>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base" %}
+
+{% block content %}
+    <div class="posts-wrapper">
+
+        {% if posts %}
+            {% for post in posts %}
+                {% include 'posts.card' %}
+            {% endfor %}
+
+            <hr>
+            <!-- Pager -->
+            <ul class="pager">
+                <li class="next">
+                    <a href="#">Older Posts &rarr;</a>
+                </li>
+            </ul>
+
+        {% else %}
+            <h2>No Posts Found</h2>
+        {% endif %}
+
+    </div>
+
+{% endblock %}
